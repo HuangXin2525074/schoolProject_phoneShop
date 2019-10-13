@@ -1,0 +1,78 @@
+
+CREATE TABLE `phoneuser` (
+  `Username` varchar(30) NOT NULL,
+  `Password` varchar(30) NOT NULL,
+  `BusinessName` varchar(100) DEFAULT NULL,
+  `FamilyName` varchar(100) NOT NULL,
+  `GivenName` varchar(100) NOT NULL,
+  `Title` varchar(100) NOT NULL,
+  `Email` varchar(100) NOT NULL,
+  `ContactNumber` varchar(30) NOT NULL,
+  `Country` varchar(100) NOT NULL,
+  `StateProvinceRegion` varchar(100) NOT NULL,
+  `CountyDistrict` varchar(100) DEFAULT NULL,
+  `CityTown` varchar(100) NOT NULL,
+  `PostalCode` varchar(10) NOT NULL,
+  `StreetAddress` varchar(100) NOT NULL,
+  `Premises` varchar(100) DEFAULT NULL,
+  `isAdmin` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`Username`),
+  UNIQUE KEY `Email` (`Email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+
+
+
+CREATE TABLE Items (
+
+ItemID INT AUTO_INCREMENT,
+ItemName VARCHAR(20) NOT NULL,
+Color VARCHAR(20) NOT NULL,
+Capacity VARCHAR(20) NOT NULL,
+Display VARCHAR(20) NOT NULL,
+Chip VARCHAR(20) NOT NULL,
+Camera VARCHAR(20) NOT NULL,
+Store INT NOT NULL, 
+Price DOUBLE NOT NULL,
+PRIMARY KEY(ItemID)
+);
+
+
+CREATE TABLE myCart(
+
+CartNo INT AUTO_INCREMENT,
+Username VARCHAR(30) NOT NULL,
+ItemName VARCHAR(20) NOT NULL,
+ItemID INT NOT NULL,
+Qty INT NOT NULL,
+Price DOUBLE NOT NULL, 
+
+PRIMARY KEY(CartNo),
+FOREIGN KEY(Username) REFERENCES phoneuser(Username)ON DELETE CASCADE,
+FOREIGN KEY(ItemID) REFERENCES Items(ItemID) ON DELETE CASCADE
+);
+
+
+
+CREATE TABLE orders(
+
+OrderNumber INT AUTO_INCREMENT,
+OrderID VARCHAR(30) NOT NULL,
+Username VARCHAR(30) NOT NULL,
+ItemName VARCHAR(20) NOT NULL,
+Qty INT NOT NULL,
+Price DOUBLE NOT NULL,
+OrderDate DATE NOT NULL,
+
+PRIMARY KEY(OrderNumber),
+FOREIGN KEY(Username) REFERENCES phoneuser(Username)ON DELETE CASCADE
+
+);
+
+
+
+
+
+
